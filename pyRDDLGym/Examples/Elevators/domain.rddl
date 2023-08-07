@@ -48,6 +48,7 @@ domain elevators_int_mdp {
 		IN-ELEVATOR-PENALTY				: { non-fluent, real, default = 1.00 };
 		PEOPLE-WAITING-PENALTY	   		: { non-fluent, real, default = 2.95 };
 		REWARD-DELIVERED		   		: { non-fluent, real, default = 30.0 };
+		MAX-PER-FLOOR			   		: { non-fluent, int, default = 5.0 };
 
 		// Useful definitions
 		TOP-FLOOR(floor)          		: { non-fluent, bool, default = false };
@@ -70,6 +71,7 @@ domain elevators_int_mdp {
 		// Intermediate fluents to help determine state fluents
 		num-arrival(floor)						: { interm-fluent, int, level = 1 }; 
 		num-get-on-elevator(elevator, floor) 	: { interm-fluent, int, level = 1 }; 
+		temp-num-person-waiting(floor)			: { interm-fluent, int, level = 1 };
 
 		// Actions: the elevator must move in one direction.
 		//          The direction changes when it hits the bottom floor if coming from above, 
@@ -110,7 +112,7 @@ domain elevators_int_mdp {
 			else 0;
 
 		// Count of people awaiting an elevator on each floor
-		num-person-waiting'(?f) = 
+		temp-num-person-waiting(?f) = 
 			// An elevator picks up existing people; newly arrived people will be served at later time steps
 			// Note: if an elevator has its door open, the direction is always downwards, so people should
 			// get on
@@ -118,6 +120,12 @@ domain elevators_int_mdp {
 				then num-arrival(?f)
 			else 
 				num-arrival(?f) + num-person-waiting(?f);
+
+		num-person-waiting'(?f) = 
+			if ( temp-num-person-waiting(?f) > MAX-PER-FLOOR )
+				then MAX-PER-FLOOR
+			else
+				temp-num-person-waiting(?f);
 		
 		// if there are people in the elevator, this will become 0 once it gets to the bottom floor
 		// Otherwise, if the elevator arrives at a floor with people waiting to go down, then those people will get on 
