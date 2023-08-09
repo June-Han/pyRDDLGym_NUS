@@ -121,6 +121,7 @@ domain elevators_int_mdp {
 			else 
 				num-arrival(?f) + num-person-waiting(?f);
 
+		// if number of people waiting for elevator is too many, people just take stairs
 		num-person-waiting'(?f) = 
 			if ( temp-num-person-waiting(?f) > MAX-PER-FLOOR )
 				then MAX-PER-FLOOR
