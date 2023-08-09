@@ -296,7 +296,7 @@ class RDDLEnv(gym.Env):
             self.simlogger.log(
                 obs, clipped_actions, reward, done, self.currentH)
 
-        self.sampler.states = state
+        self.change_state(state)
 
         return obs, reward, done, {}
 
@@ -375,7 +375,7 @@ class RDDLEnv(gym.Env):
     def numConcurrentActions(self):
         return self.max_allowed_actions
 
-    @sampler.state.setter
+    @sampler.states.setter
     def change_state(self, state):
         self.sampler.state = state
     
