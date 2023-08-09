@@ -284,8 +284,9 @@ class RDDLEnv(gym.Env):
             self.sampler.check_action_preconditions(clipped_actions)
         
         # sample next state and reward
-        obs, reward, done = self.sampler.step(clipped_actions)
-        state = self.sampler.states
+        new_sampler = deepcopy(self.sampler)
+        obs, reward, done = new_sampler.step(clipped_actions)
+        state = new_sampler.states
             
         # check if the state invariants are satisfied
         if not self.done:
@@ -295,8 +296,6 @@ class RDDLEnv(gym.Env):
         if self.simlogger is not None:
             self.simlogger.log(
                 obs, clipped_actions, reward, done, self.currentH)
-
-        self.change_state(state)
 
         return obs, reward, done, {}
 
@@ -375,9 +374,6 @@ class RDDLEnv(gym.Env):
     def numConcurrentActions(self):
         return self.max_allowed_actions
 
-    @sampler.states.setter
-    def change_state(self, state):
-        self.sampler.state = state
     
     @property
     def non_fluents(self):
