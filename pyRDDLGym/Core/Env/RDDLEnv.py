@@ -284,7 +284,7 @@ class RDDLEnv(gym.Env):
             self.sampler.check_action_preconditions(clipped_actions)
         
         # sample next state and reward
-        new_sampler = deepcopy(self.sampler)
+        new_sampler = copy.deepcopy(self.sampler)
         obs, reward, done = new_sampler.step(clipped_actions)
         state = new_sampler.states
             
