@@ -250,6 +250,56 @@ class RDDLEnv(gym.Env):
 
         return obs, reward, self.done, {}
 
+    def psuedo_step(self, actions):
+        if self.done:
+            return self.state, 0.0, self.done, {}
+
+        # make sure the action length is of currect size
+        if self.enforce_action_count_non_bool:
+            action_length = len(actions)
+        else:
+            action_length = len([
+                action 
+                for action in actions 
+                if self.model.groundactionsranges()[action] == 'bool'
+            ])
+        if (action_length > self.max_allowed_actions):
+            raise RDDLInvalidNumberOfArgumentsError(
+                f'Invalid action, expected at most '
+                f'{self.max_allowed_actions} entries, '
+                f'but got {action_length}.')
+        
+        # set full action vector
+        # values are clipped to be inside the feasible action space
+        clipped_actions = copy.deepcopy(self.defaultAction)
+        for act in actions:
+            if str(self.action_space[act]) == 'Discrete(2)':
+                if self.actionsranges[act] == 'bool':
+                    clipped_actions[act] = bool(actions[act])
+            else:
+                clipped_actions[act] = actions[act]
+                
+        # check action constraints
+        if self.enforce_action_constraints:
+            self.sampler.check_action_preconditions(clipped_actions)
+        
+        # sample next state and reward
+        obs, reward, done = self.sampler.step(clipped_actions)
+        state = self.sampler.states
+            
+        # check if the state invariants are satisfied
+        if not self.done:
+            self.sampler.check_state_invariants()               
+
+        # log to file
+        if self.simlogger is not None:
+            self.simlogger.log(
+                obs, clipped_actions, reward, done, self.currentH)
+
+        self.sampler.states = state
+
+        return obs, reward, done, {}
+
     def reset(self, seed=None):
         self.total_reward = 0
         self.currentH = 0
