@@ -23,8 +23,8 @@ non-fluents elevators {
 		IN-ELEVATOR-PENALTY 	= 0.75;
 		PEOPLE-WAITING-PENALTY 	= 3.0;
 		REWARD-DELIVERED 		= 30.0;
-		ARRIVE-PARAM(f1) 		= 0.14635538;
-		ARRIVE-PARAM(f2) 		= 0.1;
+		ARRIVE-PARAM(f1) 		= 0.1;
+		ARRIVE-PARAM(f2) 		= 0.15;
 		ARRIVE-PARAM(f3) 		= 0.2;
     ARRIVE-PARAM(f2) 		= 0.1;
 		ADJACENT-UP(f0,f1) 		= true;
