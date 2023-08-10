@@ -50,7 +50,7 @@ instance elevators_int_inst_mdp_0 {
 
 	max-nondef-actions = 2;
 
-	horizon = 40;
+	horizon = 400;
 	
 	discount = 1.0;
 } 
