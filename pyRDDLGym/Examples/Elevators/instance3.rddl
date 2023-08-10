@@ -43,7 +43,6 @@ instance elevators_int_inst_mdp_0 {
 
 	init-state { 
 		elevator-at-floor(e0, f0);
-		elevator-at-floor(e1, f0);
 	};
 
 	max-nondef-actions = 1;
