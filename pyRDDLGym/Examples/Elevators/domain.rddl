@@ -200,7 +200,7 @@ domain elevators_int_mdp {
   	// Reward is a sum of waiting penalties for those in elevators and at floor
 	reward = 
 		// Penalty for people who haven't got to the bottom floor yet
-		- IN-ELEVATOR-PENALTY * [sum_{?e: elevator} num-person-in-elevator(?e)]
+		- IN-ELEVATOR-PENALTY * [min (sum {?e: elevator} (manum-person-in-elevator ?e)) 1)]
 
 		// Penalty for those who are waiting on all floors
 		- PEOPLE-WAITING-PENALTY * [sum_{?f: floor} num-person-waiting(?f)]
