@@ -30,7 +30,7 @@ non-fluents elevators {
 		ADJACENT-UP(f1,f2) 		= true;
 		TOP-FLOOR(f2) 			= true;
 		BOTTOM-FLOOR(f0) 		= true;
-		MAX-PER-FLOOR			= 10;
+		MAX-PER-FLOOR			= 3;
  	}; 
  }
  
