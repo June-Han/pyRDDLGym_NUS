@@ -198,7 +198,7 @@ domain elevators_int_mdp {
 	};
   
   	//check number of people in elevator
-	num_in_elevator = sum_{?e: elevator} num-person-in-elevator(?e);
+	num_in_elevator = [sum_{?e: elevator} num-person-in-elevator(?e)];
 // Reward is a sum of waiting penalties for those in elevators and at floor
 	reward = 
 		// Penalty for people who haven't got to the bottom floor yet - discretized to 0 to 1
