@@ -346,8 +346,6 @@ class RDDLSimulator:
                 obs.update(rddl.ground_values(var, subs[var]))
         else:
             obs = self.state
-
-        print(subs)
         
         done = self.check_terminal_states()        
         return obs, reward, done
