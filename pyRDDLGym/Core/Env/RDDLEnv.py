@@ -284,7 +284,7 @@ class RDDLEnv(gym.Env):
             self.sampler.check_action_preconditions(clipped_actions)
         
         # sample next state and reward
-        new_sampler = copy.deepcopy(self.sampler)
+        orig_subs = deepcopy(self.sampler.subs)
         obs, reward, done = new_sampler.step(clipped_actions)
         state = new_sampler.states
             
@@ -292,6 +292,7 @@ class RDDLEnv(gym.Env):
         if not self.done:
             self.sampler.check_state_invariants()               
 
+        self.sampler.reset(orig_subs)
         # log to file
         if self.simlogger is not None:
             self.simlogger.log(
