@@ -300,6 +300,7 @@ class RDDLSimulator:
         # update state
         self.state = {}
         for state in rddl.states:
+            print(state)
             self.state.update(rddl.ground_values(state, subs[state]))
         
         # update observation
