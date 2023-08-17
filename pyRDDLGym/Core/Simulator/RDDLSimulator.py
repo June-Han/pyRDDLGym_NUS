@@ -296,7 +296,7 @@ class RDDLSimulator:
         '''Resets the state variables to their initial values.'''
         rddl = self.rddl
 
-        subs = self.subs = self.init_values.copy()
+        subs = self.subs = self.init_values.copy() if not exp_state else exp_state
         
         
         # update state
