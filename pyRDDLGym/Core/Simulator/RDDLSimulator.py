@@ -295,13 +295,15 @@ class RDDLSimulator:
     def reset(self, exp_state = None) -> Union[Dict[str, None], Args]:
         '''Resets the state variables to their initial values.'''
         rddl = self.rddl
-        print(self.init_values)
-        subs = self.subs = self.init_values.copy() if not exp_state else exp_state
+
+        subs = self.subs = self.init_values.copy()
+        
         
         # update state
         self.state = {}
+        
         for state in rddl.states:
-                self.state.update(rddl.ground_values(state, subs[state]))
+            self.state.update(rddl.ground_values(state, subs[state]))
         
         # update observation
         if self._pomdp:
@@ -344,6 +346,8 @@ class RDDLSimulator:
                 obs.update(rddl.ground_values(var, subs[var]))
         else:
             obs = self.state
+
+        print(subs)
         
         done = self.check_terminal_states()        
         return obs, reward, done
