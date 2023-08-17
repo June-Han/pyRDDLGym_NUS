@@ -295,6 +295,7 @@ class RDDLSimulator:
     def reset(self, exp_state = None) -> Union[Dict[str, None], Args]:
         '''Resets the state variables to their initial values.'''
         rddl = self.rddl
+        print(self.init_values)
         subs = self.subs = self.init_values.copy() if not exp_state else exp_state
         
         # update state
