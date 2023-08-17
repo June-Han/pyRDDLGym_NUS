@@ -292,16 +292,18 @@ class RDDLSimulator:
         '''Samples the current reward given the current state and action.'''
         return float(self._sample(self.rddl.reward, self.subs))
     
-    def reset(self) -> Union[Dict[str, None], Args]:
+    def reset(self, exp_state = None) -> Union[Dict[str, None], Args]:
         '''Resets the state variables to their initial values.'''
         rddl = self.rddl
-        subs = self.subs = self.init_values.copy()
+        subs = self.subs = self.init_values.copy() 
         
         # update state
         self.state = {}
         for state in rddl.states:
-            print(state)
-            self.state.update(rddl.ground_values(state, subs[state]))
+            if(exp_state):
+                    self.state.update(rddl.ground_values(state, exp_state[state]))
+            else:
+                    self.state.update(rddl.ground_values(state, subs[state]))
         
         # update observation
         if self._pomdp:
