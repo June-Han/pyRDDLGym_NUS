@@ -285,7 +285,7 @@ class RDDLEnv(gym.Env):
         
         # sample next state and reward
         orig_subs = copy.deepcopy(self.sampler.subs)
-        obs, reward, done = new_sampler.step(clipped_actions)
+        obs, reward, done = self.sampler.step(clipped_actions)
         state = new_sampler.states
             
         # check if the state invariants are satisfied
