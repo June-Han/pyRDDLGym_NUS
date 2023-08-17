@@ -299,10 +299,10 @@ class RDDLEnv(gym.Env):
 
         return obs, reward, done, {}
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, exp_state = None):
         self.total_reward = 0
         self.currentH = 0
-        obs, self.done = self.sampler.reset()
+        obs, self.done = self.sampler.reset(exp_state)
         self.state = self.sampler.states
 
         image = self._visualizer.render(self.state)
