@@ -300,20 +300,21 @@ class RDDLEnv(gym.Env):
 
         return obs, reward, done, {}
 
-    def reset(self, seed=None, exp_state = None):
+    def reset(self, seed=None, exp_state = None, vis = True):
         self.total_reward = 0
         self.currentH = 0
         obs, self.done = self.sampler.reset(exp_state)
         self.state = self.sampler.states
 
-        image = self._visualizer.render(self.state)
-        if self._movie_generator is not None:
-            if self._movie_per_episode:
-                self._movie_generator.save_animation(
-                    self._movie_generator.env_name + '_' + str(self._movies))
-                self._movies += 1
-            self._movie_generator.save_frame(image)            
-        self.image_size = image.size
+        if vis:
+            image = self._visualizer.render(self.state)
+            if self._movie_generator is not None:
+                if self._movie_per_episode:
+                    self._movie_generator.save_animation(
+                        self._movie_generator.env_name + '_' + str(self._movies))
+                    self._movies += 1
+                self._movie_generator.save_frame(image)            
+            self.image_size = image.size
 
         if seed is not None:
             self.seed(seed)
