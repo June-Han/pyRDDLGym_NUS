@@ -15,8 +15,8 @@ non-fluents elevators {
 	domain = elevators_int_mdp;
 
 	objects { 
-		elevator : {e0};
-		floor : {f0,f1,f2}; 
+		elevator : {e0,e1};
+		floor : {f0,f1,f2,f3}; 
 	}; 
 
 	non-fluents {
@@ -25,13 +25,16 @@ non-fluents elevators {
 		REWARD-DELIVERED 		= 30.0;
 		ARRIVE-PARAM(f1) 		= 0.1;
 		ARRIVE-PARAM(f2) 		= 0.15;
+		ARRIVE-PARAM(f3) 		= 0.15;
    
 		ADJACENT-UP(f0,f1) 		= true;
 		ADJACENT-UP(f1,f2) 		= true;
-		TOP-FLOOR(f2) 			= true;
+		ADJACENT-UP(f2,f3) 		= true;
+		TOP-FLOOR(f3) 			= true;
 		BOTTOM-FLOOR(f0) 		= true;
 		MAX-PER-FLOOR			= 3;
 		MAX-PER-ELEVATOR		= 10;
+		PRECEDENCE(e0, e1)		= true;
  	}; 
  }
  
@@ -43,11 +46,13 @@ instance elevators_int_inst_mdp_0 {
 
 	init-state { 
 		elevator-at-floor(e0, f0);
+		elevator-at-floor(e1, f0);
 	};
 
-	max-nondef-actions = 1;
+	max-nondef-actions = 2;
 
 	horizon = 200;
 	
-	discount = 1.0;
+	discount = 0.99;
+
 } 

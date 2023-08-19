@@ -72,6 +72,7 @@ pyRDDLGym/Core/Simulator/__init__.py
 pyRDDLGym/Examples/ExampleManager.py
 pyRDDLGym/Examples/InstanceGenerator.py
 pyRDDLGym/Examples/__init__.py
+pyRDDLGym/Examples/manifest.csv
 pyRDDLGym/Examples/CartPole/Continuous/domain.info
 pyRDDLGym/Examples/CartPole/Continuous/domain.rddl
 pyRDDLGym/Examples/CartPole/Continuous/instance0.rddl
@@ -84,6 +85,10 @@ pyRDDLGym/Examples/Elevators/instance0.rddl
 pyRDDLGym/Examples/Elevators/instance1.rddl
 pyRDDLGym/Examples/Elevators/instance2.rddl
 pyRDDLGym/Examples/Elevators/instance3.rddl
+pyRDDLGym/Examples/Elevators/instance4.rddl
+pyRDDLGym/Examples/Elevators/instance5.rddl
+pyRDDLGym/Examples/Elevators/instance6.rddl
+pyRDDLGym/Examples/Elevators/instance7.rddl
 pyRDDLGym/Examples/HVAC/domain.info
 pyRDDLGym/Examples/HVAC/domain.rddl
 pyRDDLGym/Examples/HVAC/instance0.rddl

@@ -49,6 +49,7 @@ domain elevators_int_mdp {
 		PEOPLE-WAITING-PENALTY	   		: { non-fluent, real, default = 2.95 };
 		REWARD-DELIVERED		   		: { non-fluent, real, default = 30.0 };
 		MAX-PER-FLOOR			   		: { non-fluent, int, default = 5.0 };
+		MAX-PER-ELEVATOR			   	: { non-fluent, int, default = 10.0 };
 
 		// Useful definitions
 		TOP-FLOOR(floor)          		: { non-fluent, bool, default = false };
@@ -130,12 +131,23 @@ domain elevators_int_mdp {
 		
 		// if there are people in the elevator, this will become 0 once it gets to the bottom floor
 		// Otherwise, if the elevator arrives at a floor with people waiting to go down, then those people will get on 
+		//num-person-in-elevator'(?e) = 
+			// When the elevator gets to the bottom floor, all people will get off
+			//if ( [exists_{?f: floor} ( elevator-at-floor(?e, ?f) ^ BOTTOM-FLOOR(?f) ) ] )
+				//then 0
+			// If the elevator door is open and is going down, people can get on to the one that has a higher precedence
+			//else num-person-in-elevator(?e) + [sum_{?f: floor} num-get-on-elevator(?e, ?f)];
+
 		num-person-in-elevator'(?e) = 
 			// When the elevator gets to the bottom floor, all people will get off
 			if ( [exists_{?f: floor} ( elevator-at-floor(?e, ?f) ^ BOTTOM-FLOOR(?f) ) ] )
 				then 0
 			// If the elevator door is open and is going down, people can get on to the one that has a higher precedence
-			else num-person-in-elevator(?e) + [sum_{?f: floor} num-get-on-elevator(?e, ?f)];
+			else 
+				if ( (num-person-in-elevator(?e) + [sum_{?f: floor} num-get-on-elevator(?e, ?f)]) > MAX-PER-ELEVATOR )
+					then MAX-PER-ELEVATOR
+				else num-person-in-elevator(?e) + [sum_{?f: floor} num-get-on-elevator(?e, ?f)];
+
 		
 		// Elevator needs to be explicitly closed unless it is at the bottom floor
 		elevator-closed'(?e) = 
