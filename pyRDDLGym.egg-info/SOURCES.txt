@@ -17,6 +17,7 @@ docs/introduction.rst
 docs/rddl.rst
 docs/rddlgraph.png
 docs/start.rst
+pyRDDLGym/Elevator.py
 pyRDDLGym/GymExample.py
 pyRDDLGym/InstGenExample.py
 pyRDDLGym/JaxExample.py
@@ -89,6 +90,7 @@ pyRDDLGym/Examples/Elevators/instance4.rddl
 pyRDDLGym/Examples/Elevators/instance5.rddl
 pyRDDLGym/Examples/Elevators/instance6.rddl
 pyRDDLGym/Examples/Elevators/instance7.rddl
+pyRDDLGym/Examples/Elevators/instance_4.pkl
 pyRDDLGym/Examples/HVAC/domain.info
 pyRDDLGym/Examples/HVAC/domain.rddl
 pyRDDLGym/Examples/HVAC/instance0.rddl

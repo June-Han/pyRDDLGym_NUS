@@ -21,6 +21,11 @@ class RandomAgent(BaseAgent):
 
     def sample_action(self, state=None):
         s = self.action_space.sample()
+        
+        # Added by TAS for our discrete scenario
+        if isinstance(s, int):
+            return s
+
         action = {}
         selected_actions = self.rng.sample(list(s), self.num_actions)
         for sample in selected_actions:
