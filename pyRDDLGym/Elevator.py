@@ -56,8 +56,8 @@ class Elevator(gym.Env):
         next_state, reward, done, info =  self.base_env.step(cont_action)
         return self.state2disc(next_state), reward, done, info
 
-    def reset(self):
-        state = self.base_env.reset()
+    def reset(self, seed=None):
+        state = self.base_env.reset(seed=seed)
         return self.state2disc(state)
 
     def render(self):
