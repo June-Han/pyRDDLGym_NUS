@@ -29,7 +29,7 @@ class Elevator(gym.Env):
         self.num_elevators = int(len(self.base_env.sampler.subs['num-person-in-elevator']))
         self.num_floors = int(len(self.base_env.sampler.subs['ARRIVE-PARAM']))
         self.max_in_elevator = int(self.base_env.sampler.subs['MAX-PER-ELEVATOR'])
-        print(f'The building has {self.num_floors} floors and {self.num_elevators} elevators. Each floor has maximum {self.num_waiting_threshold} people waiting. Each elevator can curry maximum of {self.max_in_elevator} people.')
+        print(f'The building has {self.num_floors} floors and {self.num_elevators} elevators. Each floor has maximum {self.num_waiting_threshold} people waiting. Each elevator can carry maximum of {self.max_in_elevator} people.')
 
 
         # Load Transition information
@@ -198,7 +198,7 @@ class Elevator(gym.Env):
                 if self.disc_actions[val][i] == action_list[i]:
                     count += 1
             if count == len(action_list):
-                return val
+                return int(val)
 
         return None
 
