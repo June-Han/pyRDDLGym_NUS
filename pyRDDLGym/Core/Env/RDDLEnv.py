@@ -161,7 +161,7 @@ class RDDLEnv(gym.Env):
             elif state_range == 'int':
                 high = bounds[state][1]
                 if high == np.inf:
-                    high = np.iinfo(np.int32).max
+                    high = 20
                 low = bounds[state][0]
                 if low == -np.inf:
                     low = 0
