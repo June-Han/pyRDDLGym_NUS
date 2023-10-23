@@ -4,11 +4,11 @@ from pyRDDLGym import ExampleManager
 import itertools
 import pickle
 from gymnasium import spaces
-import gymnasium as gym
+import gymnasium
 from pyRDDLGym.Visualizer.MovieGenerator import MovieGenerator
 from pathlib import Path
 
-class Elevator(gym.Env):
+class Elevator(gymnasium.Env):
     def __init__(self, is_render=False, render_path='temp_vis'):
         '''
         Discrete version of the Elevator example. Please do not modify this
