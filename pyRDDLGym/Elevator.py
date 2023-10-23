@@ -58,7 +58,7 @@ class Elevator(gymnasium.Env):
 
     def reset(self, seed=None):
         state = self.base_env.reset(seed=seed)
-        return (self.state2disc(state), {})
+        return (state, {})
 
     def render(self):
         self.base_env.render(to_display=False)
