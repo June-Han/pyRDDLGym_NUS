@@ -164,7 +164,7 @@ class RDDLEnv(gym.Env):
                     high = np.iinfo(np.int32).max
                 low = bounds[state][0]
                 if low == -np.inf:
-                    low = np.iinfo(np.int32).min
+                    low = 0
                 state_space[state] = Discrete(int(high - low + 1), start=int(low))
             else:
                 raise RDDLTypeError(
