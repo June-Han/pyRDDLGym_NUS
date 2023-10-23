@@ -1,6 +1,6 @@
 import copy
-import gym
-from gym.spaces import Discrete, Dict, Box
+import gymnasium as gym
+from gymnasium.spaces import Discrete, Dict, Box
 import numpy as np
 import pygame
 import os
