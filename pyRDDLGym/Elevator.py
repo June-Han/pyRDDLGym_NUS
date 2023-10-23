@@ -54,7 +54,7 @@ class Elevator(gymnasium.Env):
     def step(self, action):
         cont_action = self.disc2action(action)
         next_state, reward, done, info =  self.base_env.step(cont_action)
-        return {k: int(v) for k, v in next_state.items()}, reward, done, {} ,info
+        return {k: int(v) for k, v in next_state.items()}, reward, done, False ,info
 
     def reset(self, seed=None):
         state = self.base_env.reset(seed=seed)
