@@ -3,8 +3,8 @@ from pyRDDLGym import RDDLEnv
 from pyRDDLGym import ExampleManager
 import itertools
 import pickle
-from gym import spaces
-import gym
+from gymnasium import spaces
+import gymnasium as gym
 from pyRDDLGym.Visualizer.MovieGenerator import MovieGenerator
 from pathlib import Path
 
