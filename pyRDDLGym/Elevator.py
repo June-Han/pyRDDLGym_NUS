@@ -50,15 +50,23 @@ class Elevator(gymnasium.Env):
             self.MovieGen = MovieGenerator(render_path, ENV, 1000)
             self.base_env.set_visualizer(EnvInfo.get_visualizer(), movie_gen=self.MovieGen, movie_per_episode=True)
             Path(self.render_path).mkdir(parents=True, exist_ok=True)
-            
+
+        self.env_features = list(self.observation_space.keys())
+
+    def convert_state_to_list(self, state):
+        out = []
+        for i in self.env_features:
+            out.append(int(state[i]))
+        return out
+        
     def step(self, action):
         cont_action = self.disc2action(action)
         next_state, reward, done, info =  self.base_env.step(cont_action)
-        return {k: int(v) for k, v in next_state.items()}, reward, done, False ,info
+        return self.convert_state_to_list(next_state), reward, done, False ,info
 
     def reset(self, seed=None):
         state = self.base_env.reset(seed=seed)
-        return ({k: int(v) for k, v in state.items()}, {})
+        return (self.convert_state_to_list(state), {})
 
     def render(self):
         self.base_env.render(to_display=False)
