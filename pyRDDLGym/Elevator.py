@@ -13,7 +13,7 @@ class Elevator(gym.Env):
         '''
         Discrete version of the Elevator example. Please do not modify this
         '''
-        
+        print("Running from fork!!!!!")
         # build RDDL example including elevator environment
         ExampleManager.RebuildExamples()
 
