@@ -15,7 +15,7 @@ non-fluents elevators {
 	domain = elevators_int_mdp;
 
 	objects { 
-		elevator : {e0,e1};
+		elevator : {e0};
 		floor : {f0,f1,f2,f3,f4}; 
 	}; 
 
@@ -36,7 +36,6 @@ non-fluents elevators {
 		BOTTOM-FLOOR(f0) 		= true;
 		MAX-PER-FLOOR			= 3;
 		MAX-PER-ELEVATOR		= 10;
-		PRECEDENCE(e0, e1)		= true;
  	}; 
  }
  

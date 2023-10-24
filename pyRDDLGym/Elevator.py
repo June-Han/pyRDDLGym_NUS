@@ -9,7 +9,7 @@ from pyRDDLGym.Visualizer.MovieGenerator import MovieGenerator
 from pathlib import Path
 
 class Elevator(gym.Env):
-    def __init__(self, is_render=False, render_path='temp_vis'):
+    def __init__(self, is_render=False, render_path='temp_vis', instance=4):
         '''
         Discrete version of the Elevator example. Please do not modify this
         '''
@@ -19,7 +19,7 @@ class Elevator(gym.Env):
 
         # Select Elevator domain
         ENV = 'Elevators'
-        instance = 4 #
+        instance = instance #
         EnvInfo = ExampleManager.GetEnvInfo(ENV)
 
         self.base_env = RDDLEnv.RDDLEnv(domain=EnvInfo.get_domain(), instance=EnvInfo.get_instance(instance))
