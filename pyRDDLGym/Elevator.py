@@ -34,8 +34,8 @@ class Elevator(gym.Env):
 
         # Load Transition information
         if instance == 5:
-            P1 = pickle.load(open(f'{EnvInfo.path_to_env}/instance_{instance}_next_states.pkl', 'rb'))
-            P2 = pickle.load(open(f'{EnvInfo.path_to_env}/instance_{instance}_rewards.pkl', 'rb'))
+            P1 = np.load(f'{EnvInfo.path_to_env}/instance_{instance}_next_states.npy')
+            P2 = np.load(f'{EnvInfo.path_to_env}/instance_{instance}_rewards.npy')
 
             self.Prob = self.convert_to_Prob_matrix(P1,P2)
         else:
