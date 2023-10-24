@@ -33,7 +33,13 @@ class Elevator(gym.Env):
 
 
         # Load Transition information
-        self.Prob = pickle.load(open(f'{EnvInfo.path_to_env}/instance_{instance}.pkl', 'rb'))
+        if instance == 5:
+            P1 = pickle.load(open(f'{EnvInfo.path_to_env}/instance_{instance}_next_states.pkl', 'rb'))
+            P2 = pickle.load(open(f'{EnvInfo.path_to_env}/instance_{instance}_rewards.pkl', 'rb'))
+
+            self.Prob = self.convert_to_Prob_matrix(P1,P2)
+        else:
+            self.Prob = pickle.load(open(f'{EnvInfo.path_to_env}/instance_{instance}.pkl', 'rb'))
 
         self.numConcurrentActions = self.base_env.numConcurrentActions
         self.horizon = self.base_env.horizon
@@ -50,6 +56,15 @@ class Elevator(gym.Env):
             self.MovieGen = MovieGenerator(render_path, ENV, 1000)
             self.base_env.set_visualizer(EnvInfo.get_visualizer(), movie_gen=self.MovieGen, movie_per_episode=True)
             Path(self.render_path).mkdir(parents=True, exist_ok=True)
+
+    def convert_to_Prob_matrix(self, P1, P2):
+        Prob = {}
+        for s in range(len(P1)):
+            Prob[s] = {}
+            for a in range(6):
+                Prob[s][a] = [[1.0, P1[s,a], P2[s,a], 0]]
+
+        return Prob
             
     def step(self, action):
         cont_action = self.disc2action(action)
