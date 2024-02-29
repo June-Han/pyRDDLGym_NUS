@@ -9,7 +9,7 @@ from pyRDDLGym.Visualizer.MovieGenerator import MovieGenerator
 from pathlib import Path
 
 class Elevator(gym.Env):
-    def __init__(self, is_render=False, render_path='temp_vis', instance=4):
+    def __init__(self, is_render=False, render_path='temp_vis', instance=3):
         '''
         Discrete version of the Elevator example. Please do not modify this
         '''
