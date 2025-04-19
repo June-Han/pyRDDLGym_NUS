@@ -60,7 +60,7 @@ class TextVisualizer(StateViz):
         data = np.frombuffer(fig.canvas.buffer_rgba(), dtype=np.uint8)
         data = data.reshape(fig.canvas.get_width_height()[::-1] + (4,))
         data = data[:, :, :3]  # Discard alpha channel
-        img = Image.fromarray(data, 'RGBA')
+        img = Image.fromarray(data, 'RGB')
 
         self._data = data
         self._img = img
