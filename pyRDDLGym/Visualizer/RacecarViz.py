@@ -54,7 +54,7 @@ class RacecarVisualizer(StateViz):
         self.move = self.ax.add_patch(self.arrow)
 
     def convert2img(self, canvas):
-        data = np.frombuffer(canvas.tostring_rgb(), dtype=np.uint8)
+        data = np.frombuffer(canvas.buffer_rgba(), dtype=np.uint8)
         data = data.reshape(canvas.get_width_height()[::-1] + (3,))
         return Image.fromarray(data)
 

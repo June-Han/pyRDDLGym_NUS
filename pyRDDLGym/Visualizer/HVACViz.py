@@ -257,7 +257,7 @@ class HVACVisualizer(StateViz):
         return
 
     def fig2npa(self, fig):
-        data = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8)
+        data = np.frombuffer(fig.canvas.buffer_rgba(), dtype=np.uint8)
         data = data.reshape(fig.canvas.get_width_height()[::-1] + (3,))
         return data
 
@@ -321,7 +321,7 @@ class HVACVisualizer(StateViz):
     def convert2img(self, fig, ax):
 
         fig.canvas.draw()
-        data = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8)
+        data = np.frombuffer(fig.canvas.buffer_rgba(), dtype=np.uint8)
         data = data.reshape(fig.canvas.get_width_height()[::-1] + (3,))
         img = Image.fromarray(data)
         self._data = data

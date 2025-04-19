@@ -143,7 +143,7 @@ class WildfireVisualizer(StateViz):
         ax.set_position((0, 0, 1, 1))
         fig.canvas.draw()
 
-        data = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8)
+        data = np.frombuffer(fig.canvas.buffer_rgba(), dtype=np.uint8)
         data = data.reshape(fig.canvas.get_width_height()[::-1] + (3,))
 
         img = Image.fromarray(data)
@@ -154,7 +154,7 @@ class WildfireVisualizer(StateViz):
         return img
 
     def fig2npa(self, fig):
-        data = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8)
+        data = np.frombuffer(fig.canvas.buffer_rgba(), dtype=np.uint8)
         data = data.reshape(fig.canvas.get_width_height()[::-1] + (3,))
         return data
 
